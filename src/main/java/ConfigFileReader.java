@@ -5,40 +5,35 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.io.File;
 
 public class ConfigFileReader {
+	public Properties properties;
 	
-	private Properties properties;
-	private final String propertyFilePath= "configs//Configuration.properties";
-
-	
-	public ConfigFileReader(){
+	public Properties getProperties() {
 		BufferedReader reader;
+
+        String propertyFilePath = new File("config/Environment.properties").getAbsolutePath();
+
 		try {
 			reader = new BufferedReader(new FileReader(propertyFilePath));
 			properties = new Properties();
+
 			try {
 				properties.load(reader);
 				reader.close();
-			} catch (IOException e) {
+			} 
+            
+            catch (IOException e) {
 				e.printStackTrace();
 			}
-		} catch (FileNotFoundException e) {
+		} 
+        
+        catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
-		}		
+		}
+        
+        return properties;
 	}
-	
-	public long getImplicitlyWait() {		
-		String implicitlyWait = properties.getProperty("implicitlyWait");
-		if(implicitlyWait != null) return Long.parseLong(implicitlyWait);
-		else throw new RuntimeException("implicitlyWait not specified in the Configuration.properties file.");		
-	}
-	
-	public String getApplicationUrl() {
-		String baseUrl = properties.getProperty("baseUrl");
-		if(baseUrl != null) return baseUrl;
-		else throw new RuntimeException("baseUrl not specified in the Configuration.properties file.");
-	}
-
 }
