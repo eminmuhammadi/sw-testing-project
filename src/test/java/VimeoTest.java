@@ -1,3 +1,5 @@
+package main;
+
 import org.junit.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,31 +13,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import java.util.*;  
+import java.util.concurrent.TimeUnit;
+import main.ConfigFileReader;
 
 
-public class DoodleTest {
+public class VimeoTest {
     public WebDriver driver;
-    
+    public ConfigFileReader configFileReader;
+
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
     }
-    
-    @Test
-    public void testSearch() {
-        MainPage mainPage = new MainPage(this.driver);
-        LoginPage loginPage = mainPage.openLogin();
-        DashboardPage dashboardPage = loginPage.login("jarifi4728@684hh.com","jarifi4728");
         
-        System.out.println(dashboardPage.getMainCardTitle());
-        Assert.assertTrue(dashboardPage.getMainCardTitle().contains("Start by creating your first Doodle"));
-    }
-    
-
-    
     @After
     public void close() {
         if (driver != null) {

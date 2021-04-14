@@ -1,3 +1,5 @@
+package main;
+
 import org.junit.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,7 +18,7 @@ class PageBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
     
-    protected By bodyBy = By.tagName("body");
+    protected By bodySelector = By.tagName("body");
     
     public PageBase(WebDriver driver) {
         this.driver = driver;
@@ -29,7 +31,7 @@ class PageBase {
     } 
     
     public String getBodyText() {
-        WebElement bodyElement = this.waitAndReturnElement(bodyBy);
+        WebElement bodyElement = this.waitAndReturnElement(bodySelector);
         return bodyElement.getText();
     }
    

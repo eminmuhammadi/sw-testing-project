@@ -1,3 +1,5 @@
+package main;
+
 import org.junit.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,15 +16,8 @@ import org.openqa.selenium.NoSuchElementException;
 
 class MainPage extends PageBase {
 
-    private By loginMenuButtonBy = By.className("HeaderWidget-loginButton");
-
     public MainPage(WebDriver driver) {
         super(driver);
-        this.driver.get("https://doodle.com/en/");
+        this.driver.get("https://vimeo.com/");
     }    
-    
-    public LoginPage openLogin() {
-        this.waitAndReturnElement(loginMenuButtonBy).click();
-        return new LoginPage(this.driver);
-    }
 }
