@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 public class VimeoTest {
 
-    public WebDriver driver;    
-	public ConfigFileReader configFileReader;
+    public WebDriver driver;
+    public ConfigFileReader configFileReader;
     public RandomString randomString;
 
     final int BASE_TIMEOUT_SECONDS = 10;
