@@ -21,7 +21,7 @@ class PageBase {
 
     /*
      |-------------------------------
-     | PageBase
+     | constructor
      |-------------------------------
     */
     public PageBase(WebDriver driver) {

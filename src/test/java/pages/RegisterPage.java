@@ -42,11 +42,20 @@ class RegisterPage extends PageBase {
     // Link (Dismiss)
     private String linkDismissText = "//a//span[contains(text(), 'Dismiss')]";
 
-
+    /*
+     |-------------------------------
+     | constructor
+     |-------------------------------
+    */
     public RegisterPage(WebDriver driver) {
         super(driver);
     }    
     
+    /*
+     |----------------------------------
+     | register(name, email, password)
+     |----------------------------------
+    */
     public DashboardPage register(String name, String email, String password) {
         this.waitAndReturnElement(nameInput).sendKeys(name);
         this.waitAndReturnElement(emailInput).sendKeys(email);
@@ -54,23 +63,23 @@ class RegisterPage extends PageBase {
         this.waitAndReturnElement(submitButton).click();
         
         // TODO: Sometimes, it is not working due to Vimeo algo. 
+        if((this.driver).findElements(selectWhatBrings).size() != 0) {
+            // Dropdowns selector
+            Select whatBrings = new Select(this.waitAndReturnElement(selectWhatBrings));
+            whatBrings.selectByVisibleText("Record and share videos from my browser");
 
-        // // Dropdowns selector
-        // Select whatBrings = new Select(this.waitAndReturnElement(selectWhatBrings));
-        // whatBrings.selectByVisibleText("Record and share videos from my browser");
+            // Dropdowns selector
+            Select howToUse = new Select(this.waitAndReturnElement(selectHowToUse));
+            howToUse.selectByVisibleText("For personal use: as an individual or student");
 
-        // // Dropdowns selector
-        // Select howToUse = new Select(this.waitAndReturnElement(selectHowToUse));
-        // howToUse.selectByVisibleText("For personal use: as an individual or student");
+            // Continue
+            this.waitAndReturnElement(buttonContinue).click();
+        } else {
 
-        // // Continue
-        // this.waitAndReturnElement(buttonContinue).click();
-
-        //
-
-        // Solution for Vimeo algo
-        this.waitAndReturnElement(linkSkip).click();
-
+            // Solution for Vimeo algo
+            this.waitAndReturnElement(linkSkip).click();
+        }
+        
         // No thanks
         this.waitAndReturnElement(linkNoThanks).click();
 

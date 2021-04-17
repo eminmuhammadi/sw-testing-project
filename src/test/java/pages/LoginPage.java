@@ -20,10 +20,20 @@ class LoginPage extends PageBase {
     private By passwordInput = By.name("password");
     private By submitButton = By.xpath("//input[@type='submit']");
 
+    /*
+     |-------------------------------
+     | constructor
+     |-------------------------------
+    */
     public LoginPage(WebDriver driver) {
         super(driver);
     }    
     
+    /*
+     |-------------------------------
+     | login(email, password)
+     |-------------------------------
+    */
     public DashboardPage login(String email, String password) {
         this.waitAndReturnElement(emailInput).sendKeys(email);
         this.waitAndReturnElement(passwordInput).sendKeys(password);

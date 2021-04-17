@@ -35,6 +35,15 @@ class MainPage extends PageBase {
     
     /*
      |-------------------------------
+     | Get title
+     |-------------------------------
+    */
+    public String getTitle() {
+        return (this.driver).getTitle();
+    }
+
+    /*
+     |-------------------------------
      | Go to login page
      |-------------------------------
     */

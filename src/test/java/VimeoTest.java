@@ -57,6 +57,19 @@ public class VimeoTest {
 
     /*
      |-------------------------------
+     | Static Test
+     |-------------------------------
+    */
+    // @Test
+    // public void testLogin() {
+    //     MainPage mainPage = new MainPage(this.driver);
+    //     String title = "Vimeo | The world's only all-in-one video solution";
+
+    //     Assert.assertEquals(title, mainPage.getTitle());
+    // }
+
+    /*
+     |-------------------------------
      | Login
      |-------------------------------
     */
@@ -83,23 +96,47 @@ public class VimeoTest {
      | Register
      |-------------------------------
     */
-    @Test
-    public void testRegister() {
-        MainPage mainPage = new MainPage(this.driver);
-        RegisterPage registerPage = mainPage.goToRegister();
+    // @Test
+    // public void testRegister() {
+    //     MainPage mainPage = new MainPage(this.driver);
+    //     RegisterPage registerPage = mainPage.goToRegister();
 
-        configFileReader = new ConfigFileReader();
-        randomString = new RandomString();
+    //     configFileReader = new ConfigFileReader();
+    //     randomString = new RandomString();
 
-        String name = randomString.generate(6) + " " + randomString.generate(6);
+    //     String name = randomString.generate(6) + " " + randomString.generate(6);
 
-        // User credentials
-        DashboardPage dashboardPage = registerPage.register(
-            name,
-            randomString.generate(8) + "." + randomString.generate(8) + "@gmail.com", 
-            randomString.generate(8) + (configFileReader.init()).getProperty("password")
-        );
+    //     // User credentials
+    //     DashboardPage dashboardPage = registerPage.register(
+    //         name,
+    //         randomString.generate(8) + "." + randomString.generate(8) + "@gmail.com", 
+    //         randomString.generate(8) + (configFileReader.init()).getProperty("password")
+    //     );
 
-        Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(name));
-    }
+    //     Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(name));
+    // }
+
+    /*
+     |-------------------------------
+     | Logout
+     |-------------------------------
+    */
+    // @Test
+    // public void testLogout() {
+    //     MainPage mainPage = new MainPage(this.driver);
+    //     LoginPage loginPage = mainPage.goToLogin();
+
+    //     configFileReader = new ConfigFileReader();
+
+    //     // User credentials
+    //     DashboardPage dashboardPage = loginPage.login(
+    //         (configFileReader.init()).getProperty("email"), 
+    //         (configFileReader.init()).getProperty("password")
+    //     );
+
+    //     MainPage mainPageAfterLogOut = dashboardPage.logout();
+    //     String title = "Vimeo | The world's only all-in-one video solution";
+
+    //     Assert.assertEquals(title, mainPage.getTitle());
+    // }
 }
