@@ -17,7 +17,6 @@ class SettingsPage extends PageBase {
 
     private By bioTextarea  = By.xpath("//*[@id=\"wrap\"]/div[2]/main/div/div[1]/div[2]/div[2]/form/div[5]/fieldset/textarea");
     private By submitButton = By.xpath("//input[@type='submit']");
-    private By userMenu = By.xpath("//*[@id=\"topnav_menu_avatar\"]");
 
     /*
      |-------------------------------
@@ -43,13 +42,10 @@ class SettingsPage extends PageBase {
 
     /*
      |-------------------------------
-     | Go to User
+     | getBioText
      |-------------------------------
     */
-    public UserPage goToUserPage() {
-        this.waitAndReturnElement(userMenu).click();
-
-        return new UserPage(this.driver);
+    public String getBioText() {
+        return this.waitAndReturnElement(bioTextarea).getText();
     }
-    
 }

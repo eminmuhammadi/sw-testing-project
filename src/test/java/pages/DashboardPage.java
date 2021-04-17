@@ -65,5 +65,5 @@ class DashboardPage extends PageBase {
         builder.moveToElement(this.waitAndReturnElement(linkEditProfile)).click().perform();
 
         return new SettingsPage(this.driver);
-    }    
+    }   
 }

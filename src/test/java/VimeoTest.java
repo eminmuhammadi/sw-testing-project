@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import java.util.*;  
 import java.util.concurrent.TimeUnit;
+import java.lang.Thread;
 
 public class VimeoTest {
 
@@ -61,7 +62,7 @@ public class VimeoTest {
      |-------------------------------
     */
     @Test
-    public void testLogin() {
+    public void testStaticMainPage() {
         MainPage mainPage = new MainPage(this.driver);
         String title = "Vimeo | The world's only all-in-one video solution";
 
@@ -163,6 +164,8 @@ public class VimeoTest {
         randomString = new RandomString();
         String bio = randomString.generate(32);
         
-        SettingsPage updatedSettingsPage = settingsPage.editBioText(bio);
+        SettingsPage updatedSettingPage = settingsPage.editBioText(bio);
+        
+        Assert.assertTrue(updatedSettingPage.getBioText().contains(bio));
     }
 }
