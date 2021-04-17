@@ -10,7 +10,7 @@ import java.io.File;
 public class ConfigFileReader {
 	public Properties properties;
 	
-	public Properties getProperties() {
+	public Properties init() {
 		BufferedReader reader;
 
         String propertyFilePath = new File("config/Environment.properties").getAbsolutePath();

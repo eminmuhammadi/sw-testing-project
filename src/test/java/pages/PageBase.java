@@ -17,8 +17,8 @@ class PageBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    protected By bodySelector = By.tagName("body");
-    
+    protected By bodySelector  = By.tagName("body");
+
     /*
      |-------------------------------
      | PageBase
@@ -48,5 +48,4 @@ class PageBase {
         WebElement bodyElement = this.waitAndReturnElement(bodySelector);
         return bodyElement.getText();
     }
-   
 }

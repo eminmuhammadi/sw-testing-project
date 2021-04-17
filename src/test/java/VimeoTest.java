@@ -16,18 +16,20 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class VimeoTest {
+
     public WebDriver driver;    
+	public ConfigFileReader configFileReader;
+    public RandomString randomString;
+
     final int BASE_TIMEOUT_SECONDS = 10;
 
-    /*
-     |-------------------------------
-     | Warming
-     |-------------------------------
-    */
+    @BeforeClass
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
+
     @Before
     public void setup() {
-        WebDriverManager.chromedriver().setup();
-
         /*
         |-------------------------------
         | Driver Configuration
@@ -40,19 +42,6 @@ public class VimeoTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(BASE_TIMEOUT_SECONDS, TimeUnit.SECONDS);
     }
- 
-    /*
-     |-------------------------------
-     | Login
-     |-------------------------------
-    */
-    @Test
-    public void testLogin() {
-        MainPage mainPage = new MainPage(this.driver);
-        LoginPage loginPage = mainPage.goToLogin();
-        DashboardPage dashboardPage = loginPage.login("#","#");
-    }
-
 
     /*
      |-------------------------------
@@ -64,5 +53,53 @@ public class VimeoTest {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    /*
+     |-------------------------------
+     | Login
+     |-------------------------------
+    */
+    // @Test
+    // public void testLogin() {
+    //     MainPage mainPage = new MainPage(this.driver);
+    //     LoginPage loginPage = mainPage.goToLogin();
+
+    //     configFileReader = new ConfigFileReader();
+
+    //     // User credentials
+    //     DashboardPage dashboardPage = loginPage.login(
+    //         (configFileReader.init()).getProperty("email"), 
+    //         (configFileReader.init()).getProperty("password")
+    //     );
+
+    //     Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(
+    //         (configFileReader.init()).getProperty("name"))
+    //     );
+    // }
+    
+    /*
+     |-------------------------------
+     | Register
+     |-------------------------------
+    */
+    @Test
+    public void testRegister() {
+        MainPage mainPage = new MainPage(this.driver);
+        RegisterPage registerPage = mainPage.goToRegister();
+
+        configFileReader = new ConfigFileReader();
+        randomString = new RandomString();
+
+        String name = randomString.generate(6) + " " + randomString.generate(6);
+
+        // User credentials
+        DashboardPage dashboardPage = registerPage.register(
+            name,
+            randomString.generate(8) + "." + randomString.generate(8) + "@gmail.com", 
+            randomString.generate(8) + (configFileReader.init()).getProperty("password")
+        );
+
+        Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(name));
     }
 }

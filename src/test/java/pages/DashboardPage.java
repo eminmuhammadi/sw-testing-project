@@ -16,7 +16,18 @@ import org.openqa.selenium.NoSuchElementException;
 
 class DashboardPage extends PageBase {
 
+    private By userName = By.xpath("//*[@id=\"wrap\"]/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div[1]/section/div/div[1]/div/div/div/div[2]/div/h3");
+
     public DashboardPage(WebDriver driver) {
         super(driver);
     }    
+
+    /*
+     |-------------------------------
+     | getUsernameFromWrap
+     |-------------------------------
+    */
+    public String getUsernameFromWrap(){
+        return this.waitAndReturnElement(userName).getText();
+    }
 }

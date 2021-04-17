@@ -16,8 +16,10 @@ import org.openqa.selenium.NoSuchElementException;
 class MainPage extends PageBase {
 	ConfigFileReader configFileReader;
 
-    private By joinButton = By.xpath("//a[@href='/join']");
-    private By loginLink  = By.className("//a[contains(text(), Log in]");
+    private By joinButton  = By.xpath("//a[@href='/join']");
+    private By loginButton = By.xpath("//a[@href='/log_in']");
+    private By loginLink   = By.xpath("//*[@id='registration_forms']//a[contains(text(), 'Log in')]");
+    private By joinLink    = By.xpath("//*[@id='registration_forms']//a[contains(text(), 'Join')]");
 
     /*
      |-------------------------------
@@ -28,9 +30,14 @@ class MainPage extends PageBase {
         super(driver);
 
         configFileReader = new ConfigFileReader();
-        this.driver.get((configFileReader.getProperties()).getProperty("baseUrl"));
+        this.driver.get((configFileReader.init()).getProperty("baseUrl"));
     }  
     
+    /*
+     |-------------------------------
+     | Go to login page
+     |-------------------------------
+    */
     public LoginPage goToLogin() {
         this.waitAndReturnElement(joinButton).click();
         this.waitAndReturnElement(loginLink).click();
@@ -38,4 +45,15 @@ class MainPage extends PageBase {
         return new LoginPage(this.driver);
     }
 
+    /*
+     |-------------------------------
+     | Go to register page
+     |-------------------------------
+    */
+    public RegisterPage goToRegister() {
+        this.waitAndReturnElement(loginButton).click();
+        this.waitAndReturnElement(joinLink).click();
+
+        return new RegisterPage(this.driver);
+    }
 }
