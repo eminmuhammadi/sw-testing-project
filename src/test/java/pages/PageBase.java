@@ -14,10 +14,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 class PageBase {
+
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    protected By bodySelector  = By.tagName("body");
+    protected By bodySelector = By.tagName("body");
 
     /*
      |-------------------------------

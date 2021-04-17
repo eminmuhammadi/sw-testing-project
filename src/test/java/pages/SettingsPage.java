@@ -13,32 +13,43 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
-class LoginPage extends PageBase {
+class SettingsPage extends PageBase {
 
-    private By emailInput = By.name("email");
-    private By passwordInput = By.name("password");
+    private By bioTextarea  = By.xpath("//*[@id=\"wrap\"]/div[2]/main/div/div[1]/div[2]/div[2]/form/div[5]/fieldset/textarea");
     private By submitButton = By.xpath("//input[@type='submit']");
+    private By userMenu = By.xpath("//*[@id=\"topnav_menu_avatar\"]");
 
     /*
      |-------------------------------
      | constructor
      |-------------------------------
     */
-    public LoginPage(WebDriver driver) {
+    public SettingsPage(WebDriver driver) {
         super(driver);
     }    
-    
+
     /*
      |-------------------------------
-     | login(email, password)
+     | editBioText
      |-------------------------------
     */
-    public DashboardPage login(String email, String password) {
-        this.waitAndReturnElement(emailInput).sendKeys(email);
-        this.waitAndReturnElement(passwordInput).sendKeys(password);
+    public SettingsPage editBioText(String bioText) {
+        this.waitAndReturnElement(bioTextarea).clear();
+        this.waitAndReturnElement(bioTextarea).sendKeys(bioText);
         this.waitAndReturnElement(submitButton).click();
 
-        return new DashboardPage(this.driver);
+        return new SettingsPage(this.driver);
+    }
+
+    /*
+     |-------------------------------
+     | Go to User
+     |-------------------------------
+    */
+    public UserPage goToUserPage() {
+        this.waitAndReturnElement(userMenu).click();
+
+        return new UserPage(this.driver);
     }
     
 }

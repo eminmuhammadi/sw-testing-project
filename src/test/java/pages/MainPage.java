@@ -14,6 +14,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 class MainPage extends PageBase {
+    
 	ConfigFileReader configFileReader;
 
     private By joinButton  = By.xpath("//a[@href='/join']");

@@ -60,83 +60,109 @@ public class VimeoTest {
      | Static Test
      |-------------------------------
     */
-    // @Test
-    // public void testLogin() {
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     String title = "Vimeo | The world's only all-in-one video solution";
+    @Test
+    public void testLogin() {
+        MainPage mainPage = new MainPage(this.driver);
+        String title = "Vimeo | The world's only all-in-one video solution";
 
-    //     Assert.assertEquals(title, mainPage.getTitle());
-    // }
+        Assert.assertEquals(title, mainPage.getTitle());
+    }
 
     /*
      |-------------------------------
      | Login
      |-------------------------------
     */
-    // @Test
-    // public void testLogin() {
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     LoginPage loginPage = mainPage.goToLogin();
+    @Test
+    public void testLogin() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLogin();
 
-    //     configFileReader = new ConfigFileReader();
+        configFileReader = new ConfigFileReader();
 
-    //     // User credentials
-    //     DashboardPage dashboardPage = loginPage.login(
-    //         (configFileReader.init()).getProperty("email"), 
-    //         (configFileReader.init()).getProperty("password")
-    //     );
+        // User credentials
+        DashboardPage dashboardPage = loginPage.login(
+            (configFileReader.init()).getProperty("email"), 
+            (configFileReader.init()).getProperty("password")
+        );
 
-    //     Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(
-    //         (configFileReader.init()).getProperty("name"))
-    //     );
-    // }
+        Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(
+            (configFileReader.init()).getProperty("name"))
+        );
+    }
     
     /*
      |-------------------------------
      | Register
      |-------------------------------
     */
-    // @Test
-    // public void testRegister() {
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     RegisterPage registerPage = mainPage.goToRegister();
+    @Test
+    public void testRegister() {
+        MainPage mainPage = new MainPage(this.driver);
+        RegisterPage registerPage = mainPage.goToRegister();
 
-    //     configFileReader = new ConfigFileReader();
-    //     randomString = new RandomString();
+        configFileReader = new ConfigFileReader();
+        randomString = new RandomString();
 
-    //     String name = randomString.generate(6) + " " + randomString.generate(6);
+        String name = randomString.generate(6) + " " + randomString.generate(6);
 
-    //     // User credentials
-    //     DashboardPage dashboardPage = registerPage.register(
-    //         name,
-    //         randomString.generate(8) + "." + randomString.generate(8) + "@gmail.com", 
-    //         randomString.generate(8) + (configFileReader.init()).getProperty("password")
-    //     );
+        // User credentials
+        DashboardPage dashboardPage = registerPage.register(
+            name,
+            randomString.generate(8) + "." + randomString.generate(8) + "@gmail.com", 
+            randomString.generate(8) + (configFileReader.init()).getProperty("password")
+        );
 
-    //     Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(name));
-    // }
+        Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(name));
+    }
 
     /*
      |-------------------------------
      | Logout
      |-------------------------------
     */
-    // @Test
-    // public void testLogout() {
-    //     MainPage mainPage = new MainPage(this.driver);
-    //     LoginPage loginPage = mainPage.goToLogin();
+    @Test
+    public void testLogout() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLogin();
 
-    //     configFileReader = new ConfigFileReader();
+        configFileReader = new ConfigFileReader();
 
-    //     // User credentials
-    //     DashboardPage dashboardPage = loginPage.login(
-    //         (configFileReader.init()).getProperty("email"), 
-    //         (configFileReader.init()).getProperty("password")
-    //     );
+        // User credentials
+        DashboardPage dashboardPage = loginPage.login(
+            (configFileReader.init()).getProperty("email"), 
+            (configFileReader.init()).getProperty("password")
+        );
 
-    //     MainPage mainPageAfterLogOut = dashboardPage.logout();
-    //     String title = "Vimeo | The world's only all-in-one video solution";
+        MainPage mainPageAfterLogOut = dashboardPage.logout();
+        String title = "Vimeo | The world's only all-in-one video solution";
 
-    //     Assert.assertEquals(title, mainPage.getTitle());
-    // }
+        Assert.assertEquals(title, mainPage.getTitle());
+    }
+    
+    /*
+     |-------------------------------
+     | Change bio text
+     |-------------------------------
+    */
+    @Test
+    public void testAddBio() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLogin();
+
+        configFileReader = new ConfigFileReader();
+
+        // User credentials
+        DashboardPage dashboardPage = loginPage.login(
+            (configFileReader.init()).getProperty("email"), 
+            (configFileReader.init()).getProperty("password")
+        );
+
+        SettingsPage settingsPage = dashboardPage.gotToSettings();
+
+        randomString = new RandomString();
+        String bio = randomString.generate(32);
+        
+        SettingsPage updatedSettingsPage = settingsPage.editBioText(bio);
+    }
 }

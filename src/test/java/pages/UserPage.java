@@ -13,32 +13,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
-class LoginPage extends PageBase {
+class UserPage extends PageBase {
 
-    private By emailInput = By.name("email");
-    private By passwordInput = By.name("password");
-    private By submitButton = By.xpath("//input[@type='submit']");
-
+    private By bioDiv = By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[5]/div/div[1]");
+    private By bioTextarea = By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[5]/div/div[1]/textarea");
+    
     /*
      |-------------------------------
      | constructor
      |-------------------------------
     */
-    public LoginPage(WebDriver driver) {
+    public UserPage(WebDriver driver) {
         super(driver);
     }    
-    
+
     /*
      |-------------------------------
-     | login(email, password)
+     | getBioText
      |-------------------------------
     */
-    public DashboardPage login(String email, String password) {
-        this.waitAndReturnElement(emailInput).sendKeys(email);
-        this.waitAndReturnElement(passwordInput).sendKeys(password);
-        this.waitAndReturnElement(submitButton).click();
+    public String getBioText() {
+        this.waitAndReturnElement(bioDiv).click();
 
-        return new DashboardPage(this.driver);
+        return this.waitAndReturnElement(bioTextarea).getText();
     }
-    
 }
