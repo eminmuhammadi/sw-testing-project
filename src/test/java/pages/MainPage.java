@@ -66,4 +66,24 @@ class MainPage extends PageBase {
 
         return new RegisterPage(this.driver);
     }
+
+    /*
+     |-------------------------------
+     | Go to register page
+     |-------------------------------
+    */
+    public DashboardPage autoLoginSteps() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLogin();
+
+        configFileReader = new ConfigFileReader();
+
+        // User credentials
+        DashboardPage dashboardPage = loginPage.login(
+            (configFileReader.init()).getProperty("email"), 
+            (configFileReader.init()).getProperty("password")
+        );
+        
+        return dashboardPage;
+    }
 }

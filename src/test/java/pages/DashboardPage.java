@@ -20,6 +20,8 @@ class DashboardPage extends PageBase {
     private By userMenu = By.xpath("//*[@id=\"topnav_menu_avatar\"]");
     private By logoutButton = By.xpath("//*[@id=\"topnav_user_dropdown\"]//button[contains(text(), 'Log out')]");
     private By linkEditProfile = By.xpath("//*[@id=\"topnav_user_dropdown\"]//a[contains(text(), 'Edit profile')]");
+    private By newVideoButton = By.xpath("//*[@id=\"new_video_dropdown_button\"]");
+    private By linkUpload = By.xpath("//*[@id=\"topnav_desktop_upload_button\"]");
 
     /*
      |-------------------------------
@@ -65,5 +67,19 @@ class DashboardPage extends PageBase {
         builder.moveToElement(this.waitAndReturnElement(linkEditProfile)).click().perform();
 
         return new SettingsPage(this.driver);
+    }
+
+    /*
+     |-------------------------------
+     | Go to Upload
+     |-------------------------------
+    */
+    public UploadPage gotToUpload() {
+        Actions builder = new Actions(this.driver);
+        
+        builder.moveToElement(this.waitAndReturnElement(newVideoButton)).perform();
+        builder.moveToElement(this.waitAndReturnElement(linkUpload)).click().perform();
+
+        return new UploadPage(this.driver);
     }   
 }

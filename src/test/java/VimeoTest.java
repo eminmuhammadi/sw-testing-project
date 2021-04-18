@@ -64,9 +64,21 @@ public class VimeoTest {
     @Test
     public void testStaticMainPage() {
         MainPage mainPage = new MainPage(this.driver);
-        String title = "Vimeo | The world's only all-in-one video solution";
 
-        Assert.assertEquals(title, mainPage.getTitle());
+        String[] pageContents = new String[] { 
+            "Why Vimeo?", 
+            "Features", 
+            "Resources", 
+            "Watch",
+            "Pricing",
+            "Enterprise",
+            "Join",
+            "New video"
+        };
+
+        for (String content : pageContents) {
+            Assert.assertTrue(mainPage.getBodyText().contains(content));
+        }
     }
 
     /*
@@ -77,15 +89,7 @@ public class VimeoTest {
     @Test
     public void testLogin() {
         MainPage mainPage = new MainPage(this.driver);
-        LoginPage loginPage = mainPage.goToLogin();
-
-        configFileReader = new ConfigFileReader();
-
-        // User credentials
-        DashboardPage dashboardPage = loginPage.login(
-            (configFileReader.init()).getProperty("email"), 
-            (configFileReader.init()).getProperty("password")
-        );
+        DashboardPage dashboardPage = mainPage.autoLoginSteps();
 
         Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(
             (configFileReader.init()).getProperty("name"))
@@ -125,20 +129,16 @@ public class VimeoTest {
     @Test
     public void testLogout() {
         MainPage mainPage = new MainPage(this.driver);
-        LoginPage loginPage = mainPage.goToLogin();
+        DashboardPage dashboardPage = mainPage.autoLoginSteps();
 
         configFileReader = new ConfigFileReader();
 
-        // User credentials
-        DashboardPage dashboardPage = loginPage.login(
-            (configFileReader.init()).getProperty("email"), 
-            (configFileReader.init()).getProperty("password")
-        );
-
         MainPage mainPageAfterLogOut = dashboardPage.logout();
-        String title = "Vimeo | The world's only all-in-one video solution";
 
-        Assert.assertEquals(title, mainPage.getTitle());
+        Assert.assertEquals(
+            (configFileReader.init()).getProperty("main_title"), 
+            mainPage.getTitle()
+        );
     }
     
     /*
@@ -149,15 +149,7 @@ public class VimeoTest {
     @Test
     public void testAddBio() {
         MainPage mainPage = new MainPage(this.driver);
-        LoginPage loginPage = mainPage.goToLogin();
-
-        configFileReader = new ConfigFileReader();
-
-        // User credentials
-        DashboardPage dashboardPage = loginPage.login(
-            (configFileReader.init()).getProperty("email"), 
-            (configFileReader.init()).getProperty("password")
-        );
+        DashboardPage dashboardPage = mainPage.autoLoginSteps();
 
         SettingsPage settingsPage = dashboardPage.gotToSettings();
 
@@ -167,5 +159,29 @@ public class VimeoTest {
         SettingsPage updatedSettingPage = settingsPage.editBioText(bio);
         
         Assert.assertTrue(updatedSettingPage.getBioText().contains(bio));
+    }
+    
+    /*
+     |-------------------------------
+     | Upload a file
+     |-------------------------------
+    */
+    @Test
+    public void testUpload() {
+        MainPage mainPage = new MainPage(this.driver);
+        DashboardPage dashboardPage = mainPage.autoLoginSteps();
+
+        UploadPage uploadPage = dashboardPage.gotToUpload();
+        String videoName = "video.mp4";
+        UploadPage updatedUploadPage = uploadPage.upload(videoName);
+        
+        // Note: Upload can be take a max 10 seconds (not required)
+        try {
+            TimeUnit.MILLISECONDS.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertTrue(updatedUploadPage.getVideoFileName().contains(videoName));
     }
 }

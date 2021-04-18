@@ -17,6 +17,7 @@ class PageBase {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected JavascriptExecutor jse;
 
     protected By bodySelector = By.tagName("body");
 
@@ -39,7 +40,17 @@ class PageBase {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
     } 
- 
+
+    /*
+     |-------------------------------
+     | waitAndReturnElement
+     |-------------------------------
+    */
+    protected WebElement waitUntilEnabledAndReturnElement(By locator) {
+        this.wait.until(ExpectedConditions.elementToBeClickable(locator));
+        return this.driver.findElement(locator);
+    } 
+
     /*
      |-------------------------------
      | getBodyText
