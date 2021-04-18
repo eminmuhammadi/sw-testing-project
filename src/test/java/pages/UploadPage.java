@@ -44,6 +44,11 @@ class UploadPage extends PageBase {
         return new UploadPage(this.driver);
     }
 
+    /*
+     |-------------------------------
+     | getVideoFileName
+     |-------------------------------
+    */
     public String getVideoFileName() {
         this.waitUntilEnabledAndReturnElement(submitButton).click();
 
