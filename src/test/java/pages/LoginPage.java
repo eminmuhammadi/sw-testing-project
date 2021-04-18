@@ -40,5 +40,16 @@ class LoginPage extends PageBase {
 
         return new DashboardPage(this.driver);
     }
+
+    /*
+     |-------------------------------
+     | goBack
+     |-------------------------------
+    */
+    public MainPage goBack() {
+        this.driver.navigate().back();
+
+        return new MainPage(this.driver);
+    }   
     
 }

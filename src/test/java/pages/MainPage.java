@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Cookie;
 
 class MainPage extends PageBase {
     
@@ -85,5 +86,18 @@ class MainPage extends PageBase {
         );
         
         return dashboardPage;
+    }
+
+    public DashboardPage goLoginWithCookie() {
+        configFileReader = new ConfigFileReader();
+
+        this.driver.manage().addCookie(new Cookie(
+            "vimeo", 
+            (configFileReader.init()).getProperty("cookie_name_vimeo")
+        ));
+
+        this.driver.get((configFileReader.init()).getProperty("baseUrl"));
+
+        return new DashboardPage(this.driver);
     }
 }

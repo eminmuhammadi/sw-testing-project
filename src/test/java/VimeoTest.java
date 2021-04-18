@@ -83,6 +83,43 @@ public class VimeoTest {
 
     /*
      |-------------------------------
+     | History Test
+     |-------------------------------
+    */
+    @Test
+    public void testBackButton() {
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLogin();
+
+        configFileReader = new ConfigFileReader();
+        MainPage updatedMainPage = loginPage.goBack();
+
+        Assert.assertEquals(
+            (configFileReader.init()).getProperty("main_title"), 
+            updatedMainPage.getTitle()
+        );
+    }
+
+    /*
+     |-------------------------------
+     | Login with cookie
+     |-------------------------------
+    */
+    @Test
+    public void testLoginWithCookie() {
+        MainPage mainPage = new MainPage(this.driver);
+        DashboardPage dashboardPage = mainPage.goLoginWithCookie();
+
+        configFileReader = new ConfigFileReader();
+
+        Assert.assertEquals(
+            (configFileReader.init()).getProperty("dashboard_title"), 
+            dashboardPage.getTitle()
+        );
+    }
+
+    /*
+     |-------------------------------
      | Login
      |-------------------------------
     */
@@ -100,7 +137,7 @@ public class VimeoTest {
      |-------------------------------
      | Register
      |-------------------------------
-    */
+    // */
     @Test
     public void testRegister() {
         MainPage mainPage = new MainPage(this.driver);

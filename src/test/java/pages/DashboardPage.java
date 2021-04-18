@@ -81,5 +81,14 @@ class DashboardPage extends PageBase {
         builder.moveToElement(this.waitAndReturnElement(linkUpload)).click().perform();
 
         return new UploadPage(this.driver);
-    }   
+    }
+
+    /*
+     |-------------------------------
+     | Get title
+     |-------------------------------
+    */
+    public String getTitle() {
+        return (this.driver).getTitle();
+    }
 }
