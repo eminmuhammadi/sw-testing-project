@@ -88,6 +88,11 @@ class MainPage extends PageBase {
         return dashboardPage;
     }
 
+    /*
+     |------------------------------------
+     | Go to dashboard without Logging in
+     |------------------------------------
+    */
     public DashboardPage goLoginWithCookie() {
         configFileReader = new ConfigFileReader();
 

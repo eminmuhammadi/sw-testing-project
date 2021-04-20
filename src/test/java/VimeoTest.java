@@ -128,6 +128,8 @@ public class VimeoTest {
         MainPage mainPage = new MainPage(this.driver);
         DashboardPage dashboardPage = mainPage.autoLoginSteps();
 
+        configFileReader = new ConfigFileReader();
+
         Assert.assertTrue(dashboardPage.getUsernameFromWrap().contains(
             (configFileReader.init()).getProperty("name"))
         );
@@ -137,7 +139,7 @@ public class VimeoTest {
      |-------------------------------
      | Register
      |-------------------------------
-    // */
+    */
     @Test
     public void testRegister() {
         MainPage mainPage = new MainPage(this.driver);

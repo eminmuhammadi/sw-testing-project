@@ -16,7 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 
 class DashboardPage extends PageBase {
 
-    private By userName = By.xpath("//*[@id=\"wrap\"]/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div[1]/section/div/div[1]/div/div/div/div[2]/div/h3");
+    private By userName = By.xpath("//*[@id=\"wrap\"]/div[2]/main/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[1]/div/div/div/div[1]/div/div[1]/section/div/div[1]/div/div/div/div/div/h3");
     private By userMenu = By.xpath("//*[@id=\"topnav_menu_avatar\"]");
     private By logoutButton = By.xpath("//*[@id=\"topnav_user_dropdown\"]//button[contains(text(), 'Log out')]");
     private By linkEditProfile = By.xpath("//*[@id=\"topnav_user_dropdown\"]//a[contains(text(), 'Edit profile')]");
