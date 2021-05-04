@@ -14,7 +14,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.JavascriptExecutor;
-
+import java.util.*;  
+import java.util.concurrent.TimeUnit;
+import java.lang.Thread;
 
 class RegisterPage extends PageBase {
 
@@ -85,6 +87,12 @@ class RegisterPage extends PageBase {
 
         // Go Dashboard
         this.waitAndReturnElement(goToDashboardFromLogo).click();
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // Remove black screen
         ((JavascriptExecutor) this.driver).executeScript("var xPathRes=document.evaluate(\""+linkDismissText+"\",document,null,XPathResult.FIRST_ORDERED_NODE_TYPE,null);xPathRes.singleNodeValue.click();");
